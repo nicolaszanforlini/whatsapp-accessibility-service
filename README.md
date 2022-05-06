@@ -5,6 +5,7 @@ send lot of message for whatsapp contact
 ### how to use :
 
 - clone depot
+- install app with an IDE
 - active the service in accessibility service of settings android
 - enter contact name and message
 - send button
