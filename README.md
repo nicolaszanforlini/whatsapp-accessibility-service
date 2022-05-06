@@ -2,6 +2,15 @@
 
 send lot of message for whatsapp contact
 
+### environement version
+
+build.gradle :
+![alt text](4.png)
+![alt text](5.png)
+
+IDE :
+![alt text](6.png)
+
 ### how to use :
 
 - clone depot
