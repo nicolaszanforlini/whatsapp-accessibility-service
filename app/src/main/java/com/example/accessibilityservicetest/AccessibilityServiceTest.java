@@ -19,76 +19,78 @@ public class AccessibilityServiceTest extends AccessibilityService {
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
 
-        AccessibilityNodeInfoCompat textNodeInfoCompat = AccessibilityNodeInfoCompat.wrap(getRootInActiveWindow());
-        //Log.e(TAG, "text node info compat : "+textNodeInfoCompat);
-        List<AccessibilityNodeInfoCompat>l = textNodeInfoCompat.findAccessibilityNodeInfosByText(ContactConfig.contact);
-        if(l != null && !l.isEmpty()) {
-            l.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-            Log.e(TAG, "click 1 : " + l);
-            l.clear();
-            List<AccessibilityNodeInfoCompat>lDialBox2 = new ArrayList<>();
-            for (int i = 0; i < textNodeInfoCompat.getChildCount(); i++) {
+        if(!ContactConfig.contact.equals("") && !ContactConfig.msg.equals("")) {
 
-                AccessibilityNodeInfoCompat result = textNodeInfoCompat.getChild(i);
-                if (result != null) {
-                    Log.e(TAG, "result child l ------ : " + result.getClassName().toString() + " name l : "+result.getContentDescription());
-                    lDialBox2.add(result);
+            AccessibilityNodeInfoCompat textNodeInfoCompat = AccessibilityNodeInfoCompat.wrap(getRootInActiveWindow());
+            //Log.e(TAG, "text node info compat : "+textNodeInfoCompat);
+            List<AccessibilityNodeInfoCompat>l = textNodeInfoCompat.findAccessibilityNodeInfosByText(ContactConfig.contact);
+            if(l != null && !l.isEmpty()) {
+                l.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                Log.e(TAG, "click 1 : " + l);
+                l.clear();
+                List<AccessibilityNodeInfoCompat>lDialBox2 = new ArrayList<>();
+                for (int i = 0; i < textNodeInfoCompat.getChildCount(); i++) {
+
+                    AccessibilityNodeInfoCompat result = textNodeInfoCompat.getChild(i);
+                    if (result != null) {
+                        Log.e(TAG, "result child l ------ : " + result.getClassName().toString() + " name l : "+result.getContentDescription());
+                        lDialBox2.add(result);
+                    }
                 }
-            }
-            if(lDialBox2.size() == 10) {
-                Log.e(TAG, "click send l");
-                Log.e(TAG,"try send l = "+lDialBox2.size());
-                lDialBox2.get(9).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-            }
-            if(lDialBox2.size() == 11) {
-                Log.e(TAG,"list size before send = "+lDialBox2.size());
-                Log.e(TAG, "set text");
-                Bundle bundle = new Bundle();
-                bundle.putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, ContactConfig.msg);
-                lDialBox2.get(7).performAction(AccessibilityNodeInfo.ACTION_SET_TEXT, bundle);
-            }
-        }
-
-        if(event.getEventType() == TYPE_WINDOW_STATE_CHANGED) {
-            List<AccessibilityNodeInfoCompat>lDialBox = new ArrayList<>();
-            for (int i = 0; i < textNodeInfoCompat.getChildCount(); i++) {
-
-                AccessibilityNodeInfoCompat result = textNodeInfoCompat.getChild(i);
-                if (result != null) {
-                    Log.e(TAG, "result child ------ : " + result.getClassName().toString() + " name : " + result.getContentDescription());
-                    lDialBox.add(result);
+                if(lDialBox2.size() == 10) {
+                    Log.e(TAG, "click send l");
+                    Log.e(TAG,"try send l = "+lDialBox2.size());
+                    lDialBox2.get(9).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                }
+                if(lDialBox2.size() == 11) {
+                    Log.e(TAG,"list size before send = "+lDialBox2.size());
+                    Log.e(TAG, "set text");
+                    Bundle bundle = new Bundle();
+                    bundle.putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, ContactConfig.msg);
+                    lDialBox2.get(7).performAction(AccessibilityNodeInfo.ACTION_SET_TEXT, bundle);
                 }
             }
 
-            if(lDialBox.size() == 9) {
-                Log.e(TAG,"window all contacts elements size in window = " + lDialBox.size());
-                lDialBox.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-            }
+            if(event.getEventType() == TYPE_WINDOW_STATE_CHANGED) {
+                List<AccessibilityNodeInfoCompat>lDialBox = new ArrayList<>();
+                for (int i = 0; i < textNodeInfoCompat.getChildCount(); i++) {
 
-            // click image button to send message in dialBox contact
-            if(lDialBox.size() == 6) {
-                Log.e(TAG,"size elements in dialbox = "+lDialBox.size());
-                Log.e(TAG, "click in dial Box contact");
-                lDialBox.get(2).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-            }
+                    AccessibilityNodeInfoCompat result = textNodeInfoCompat.getChild(i);
+                    if (result != null) {
+                        Log.e(TAG, "result child ------ : " + result.getClassName().toString() + " name : " + result.getContentDescription());
+                        lDialBox.add(result);
+                    }
+                }
 
-            // set message input in edit text
-            if(lDialBox.size() == 11) {
-                Log.e(TAG,"size window before send = " + lDialBox.size());
-                Log.e(TAG, "set text");
-                Bundle bundle = new Bundle();
-                bundle.putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, ContactConfig.msg);
-                lDialBox.get(7).performAction(AccessibilityNodeInfo.ACTION_SET_TEXT, bundle);
-            }
+                if(lDialBox.size() == 9) {
+                    Log.e(TAG,"window all contacts elements size in window = " + lDialBox.size());
+                    lDialBox.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                }
 
-            if(lDialBox.size() == 10) {
-                Log.e(TAG, "click 3 send message");
-                Log.e(TAG,"size window contact send message = " + lDialBox.size());
-                lDialBox.get(9).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-            }
+                // click image button to send message in dialBox contact
+                if(lDialBox.size() == 6) {
+                    Log.e(TAG,"size elements in dialbox = "+lDialBox.size());
+                    Log.e(TAG, "click in dial Box contact");
+                    lDialBox.get(2).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                }
 
+                // set message input in edit text
+                if(lDialBox.size() == 11) {
+                    Log.e(TAG,"size window before send = " + lDialBox.size());
+                    Log.e(TAG, "set text");
+                    Bundle bundle = new Bundle();
+                    bundle.putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, ContactConfig.msg);
+                    lDialBox.get(7).performAction(AccessibilityNodeInfo.ACTION_SET_TEXT, bundle);
+                }
+
+                // send message
+                if(lDialBox.size() == 10) {
+                    Log.e(TAG, "click 3 send message");
+                    Log.e(TAG,"size window contact send message = " + lDialBox.size());
+                    lDialBox.get(9).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                }
+            }
         }
-
     }
 
     @Override

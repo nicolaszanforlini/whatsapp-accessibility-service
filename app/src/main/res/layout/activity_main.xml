@@ -6,15 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.button.MaterialButton
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnAccess"
-        android:text="Accessibility"
+        android:id="@+id/txtTitle"
+        android:text="Whatsapp Service"
         android:textAllCaps="false"
-        android:backgroundTint="@color/black"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"
         />
 
     <TextView
@@ -24,7 +27,7 @@
         android:text="contact"
         android:textColor="@color/black"
         android:layout_marginStart="10dp"
-        android:layout_below="@+id/btnAccess"
+        android:layout_below="@+id/txtTitle"
         android:layout_marginEnd="10dp"
         />
 
@@ -36,7 +39,8 @@
         android:layout_marginTop="3dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:inputType="text" />
+        android:inputType="text"
+        tools:ignore="Autofill,LabelFor" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -60,18 +64,53 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:inputType="textMultiLine"
-        android:lines="5"/>
+        android:lines="5"
+        tools:ignore="Autofill,LabelFor" />
 
-    <com.google.android.material.button.MaterialButton
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnSend"
-        android:text="Send"
+        android:id="@+id/layoutBtn"
         android:layout_below="@+id/edtMsg"
-        android:textAllCaps="false"
-        android:backgroundTint="@color/black"
+        android:orientation="horizontal"
         android:layout_centerHorizontal="true"
+        >
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSend"
+            android:text="Send"
+            android:layout_marginEnd="10dp"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/black"
+            android:layout_marginTop="20dp"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnReset"
+            android:layout_marginStart="10dp"
+            android:text="reset"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/black"
+            android:layout_marginTop="20dp"
+            />
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAccess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/red"
+        android:text="Accessibility"
         android:layout_marginTop="20dp"
+        android:layout_below="@+id/layoutBtn"
+        android:textAllCaps="false"
         />
 
 </RelativeLayout>
+

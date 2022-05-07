@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     EditText contact;
     EditText msg;
     MaterialButton btnSend;
+    MaterialButton btnReset;
 
     public static final String TAG = "mainTag";
 
@@ -27,11 +28,12 @@ public class MainActivity extends AppCompatActivity {
 
         btnAccessibility = findViewById(R.id.btnAccess);
         btnSend = findViewById(R.id.btnSend);
+        btnReset = findViewById(R.id.btnReset);
         msg = findViewById(R.id.edtMsg);
         contact = findViewById(R.id.edtContact);
 
         if(!checkAccessibilityPermission()){
-            Toast.makeText(MainActivity.this, "Permission denied... active the service", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "activate the service", Toast.LENGTH_SHORT).show();
         }
 
         btnAccessibility.setOnClickListener(new View.OnClickListener() {
@@ -43,14 +45,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContactConfig.msg = "";
+                ContactConfig.contact = "";
+            }
+        });
+
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e(TAG, "btn Send clicked");
                 ContactConfig.contact = contact.getText().toString();
                 ContactConfig.msg = msg.getText().toString();
-                Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.whatsapp");
-                startActivity(launchIntent);
+                if( !(ContactConfig.contact.equals("")) && !(ContactConfig.msg.equals("")) ) {
+                    Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.whatsapp");
+                    startActivity(launchIntent);
+                } else {
+                    Toast.makeText(MainActivity.this, "enter contact and message...", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
