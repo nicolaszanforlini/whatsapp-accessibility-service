@@ -37,11 +37,13 @@ public class AccessibilityServiceTest extends AccessibilityService {
                         lDialBox2.add(result);
                     }
                 }
+                // send
                 if(lDialBox2.size() == 10) {
                     Log.e(TAG, "click send l");
                     Log.e(TAG,"try send l = "+lDialBox2.size());
                     lDialBox2.get(9).performAction(AccessibilityNodeInfo.ACTION_CLICK);
                 }
+                //set
                 if(lDialBox2.size() == 11) {
                     Log.e(TAG,"list size before send = "+lDialBox2.size());
                     Log.e(TAG, "set text");
