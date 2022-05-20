@@ -23,8 +23,6 @@ IDE :
 
 for stopping send message, close window whatsapp
 
-/!\ don't stop the service in settings android, if you stop the service you need to reinstall the app
-
 ![alt text](1.jpg)
 ![alt text](_2.jpg)
 ![alt text](_3.jpg)
